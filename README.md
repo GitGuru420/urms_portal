@@ -1,4 +1,4 @@
-# 📅 University Routine Management System (SRMS)
+# 📅 University Routine Management System (URMS)
 
 **A Project By:**
 * Raisul Islam (223071051)
