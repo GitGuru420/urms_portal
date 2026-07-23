@@ -1,7 +1,11 @@
-# 📅 Smart Routine Management System (SRMS)
+# 📅 University Routine Management System (SRMS)
+
+**A Project By:**
+* Raisul Islam (223071051)
+* Sharmin Akter Ritu (223071076)
 
 ## 🚀 Overview
-The **Smart Routine Management System** is a robust, full-stack web application designed to automate and optimize the process of class scheduling. It eliminates manual errors, prevents scheduling conflicts, and provides a seamless real-time routine viewing experience for students and faculty.
+The **University Routine Management System** is a robust, full-stack web application designed to automate and optimize the process of class scheduling. It eliminates manual errors, prevents scheduling conflicts, and provides a seamless real-time routine viewing experience for students and faculty.
 
 ## 💡 Solution to Existing Problems (Unique Ideas)
 * **Conflict-Free Scheduling:** An integrated validation engine (Rule-based heuristic logic) ensures no two classes are assigned to the same room or teacher at the same time.
@@ -14,49 +18,57 @@ The **Smart Routine Management System** is a robust, full-stack web application 
 * **Frontend:** HTML5, Tailwind CSS
 * **Deployment:** Render.com
 
+---
+
 ## ⚙️ System Architecture Flowchart
+
 ```mermaid
 graph TD
-    subgraph Frontend [Frontend - Client Side]
-        UI[Web Browser / UI]
-        CSS[Tailwind CSS & HTML5]
+    subgraph Frontend [Frontend - UI/UX]
+        UI[Web Browser]
+        CSS[Tailwind CSS & HTML]
     end
 
-    subgraph Backend [Backend - Render.com Hosting]
+    subgraph Backend [Backend - Render Hosting]
         Django[Django Framework]
-        Auth[Role-Based Access Control]
-        Logic[Validation Engine / Business Logic]
+        Auth[Role-Based Access]
+        Logic[Validation Engine]
     end
 
-    subgraph Database [Cloud Database]
+    subgraph Database [Cloud DB]
         Neon[(Neon DB - PostgreSQL)]
     end
 
-    UI -->|HTTP Requests| Django
-    Django -->|HTTP Responses| UI
+    UI -->|Requests| Django
+    Django -->|Responses| UI
     UI --- CSS
     Django --- Auth
     Django --- Logic
-    Logic <-->|Read / Write Data| Neon
+    Logic <-->|Read/Write Data| Neon
+```
 
+---
 
+## 🔄 Data Flow Diagram (Conflict Validation Logic)
 
+```mermaid
 graph LR
-    Admin[Dept Admin] -->|1. Assigns Class, Room & Time| Engine(Validation Engine)
-    Engine -->|2. Checks existing records| DB[(PostgreSQL Database)]
-    DB -->|3. Returns Data Status| Engine
+    Admin[Dept Admin] -->|1. Assigns Class & Time| Engine(Validation Engine)
+    Engine -->|2. Checks existing records| DB[(PostgreSQL DB)]
+    DB -->|3. Returns Data| Engine
     
-    Engine -->|4a. Conflict Detected| Error[Show Error Message]
+    Engine -->|4a. Conflict Found| Error[Show Error Message]
     Error --> Admin
     
-    Engine -->|4b. No Conflict| Save[Save New Routine]
+    Engine -->|4b. No Conflict| Save[Save Routine]
     Save --> DB
     
-    Student[Student / Teacher] -->|5. Requests Routine View| View(Query Routine Data)
-    View --> DB
-    DB -->|6. Sends Data| View
-    View -->|7. Displays Routine| Student
+    Student[Student/Teacher] -->|5. Views Routine| View(Fetch Data)
+    View <--> DB
+    View --> Student
 ```
+
+---
 
 ## 📂 Project Structure
 ```text
@@ -73,5 +85,15 @@ URMS_WORKSPACE/
 ├── .env                    # Environment Variables (Ignored in Git)
 ├── Procfile                # Deployment instructions for Render
 └── requirements.txt        # Python dependencies
+```
 
+## 🌐 Live Demo
+You can access the live working application here:
+**[View Live Website](https://urms-workspace.onrender.com/)**
 
+## 🚀 How to Run Locally
+1. Clone the repository: `git clone <your-repo-link>`
+2. Install dependencies: `pip install -r requirements.txt`
+3. Setup `.env` file with your DB credentials.
+4. Run migrations: `python manage.py migrate`
+5. Start server: `python manage.py runserver`
